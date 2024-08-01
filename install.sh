@@ -7,6 +7,11 @@ sudo xbps-install -Syu
 ### Basic System Setup
 sudo xbps-install emacs-gtk3 xorg-minimal xorg-fonts bspwm rxvt-unicode lightdm lightdm-webkit2-greeter elogind sxhkd mesa-dri xrandr feh wget curl git
 
+# If we have an Atom IGPU then we need the xf86 driver
+if lspci -v -s $(lspci | grep ' VGA ' | cut -d" " -f 1) | grep -q "Atom"; then
+    sudo xbps-install xf86-video-intel
+fi
+
 # Install fonts
 sudo xbps-install font-ibm-plex-otf font-ibm-plex-ttf noto-fonts-ttf noto-fonts-cjk
 
@@ -72,7 +77,7 @@ sudo cp ~/.dotfiles/etc/user-dirs.defaults /etc/xdg/user-dirs.defaults
 xdg-user-dirs-update
 
 ## Xorg touchpad settings
-mkdir -p /etc/X11/xorg.conf.d
+sudo mkdir -p /etc/X11/xorg.conf.d
 sudo cp ~/.dotfiles/etc/touchpad.conf /etc/X11/xorg.conf.d/30-touchpade.conf
 
 ## URXVT
@@ -104,6 +109,9 @@ cp ~/.dotfiles/local/magelight.rasi ~/.local/share/rofi/themes/magelight.rasi
 sudo xbps-install NetworkManager
 sudo ln -s /etc/sv/NetworkManager /var/service
 
+# Disable wpa_supplicant
+sudo rm /var/service/wpa_supplicant
+
 ## screenshooter
 sudo xbps-install xfce4-screenshooter
 
@@ -133,7 +141,7 @@ sudo xbps-install firefox
 sudo xbps-install gomuks
 
 ## Keepass
-
+sudo xbps-install keepassxc
 
 ## Scheme installs
 sudo xbps-install chicken chicken-devel guile
