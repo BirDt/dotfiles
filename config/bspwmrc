@@ -25,6 +25,9 @@ pgrep -x picom > /dev/null || picom -b
 # Network manager applet
 pgrep -x nm-applet > /dev/null || nm-applet &
 
+# Power Manager
+pgrep -x xfce4-power-manager > /dev/null || xfce4-power-manager &
+
 # Pipewire
 pgrep -x pipewire > /dev/null || pipewire &
 

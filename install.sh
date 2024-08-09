@@ -122,7 +122,7 @@ sudo xbps-install i3lock-fancy
 cp ~/.dotfiles/.emacs ~/.emacs
 
 ## xfce4-panel
-sudo xbps-install xfce4-panel xfce4-battery-plugin xfce4-pulseaudio-plugin network-manager-applet
+sudo xbps-install xfce4-panel xfce4-battery-plugin xfce4-pulseaudio-plugin network-manager-applet xfce4-power-manager
 
 # clone ~/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml
 mkdir -p ~/.config/xfce4/xfconf/xfce-perchannel-xml
@@ -151,5 +151,15 @@ chicken-install -s apropos chicken-doc srfi-18
 cd `csi -e '(import (chicken platform)) (display (chicken-home))(newline)'`
 sudo curl https://3e8.org/pub/chicken-doc/chicken-doc-repo-5.tgz | sudo tar zx
 cd ~
+
+## Flatpak
+sudo xbps-install flatpak
+
+## Godot
+sudo xbps-install godot
+
+# Copy Godot editor config
+mkdir -p ~/.config/godot
+cp ~/.dotfiles/config/godot_settings.tres ~/.config/godot/editor_settings-4.tres
 
 sudo reboot
